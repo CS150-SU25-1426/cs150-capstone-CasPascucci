@@ -15,8 +15,13 @@ class FilamentSpool {
         double costPerKg;
     public:
         FilamentSpool();
-        FilamentSpool(const std::string& id, const std::string& material, const std::string& color,
-                      double diameterMM, double totalGrams, double remainingGrams, double costPerKg);
+        FilamentSpool(const std::string& id,
+                      const std::string& material,
+                      const std::string& color,
+                      double diameterMM,
+                      double totalGrams,
+                      double remainingGrams,
+                      double costPerKg);
         FilamentSpool(const FilamentSpool& other);
         ~FilamentSpool();
 
