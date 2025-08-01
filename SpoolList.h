@@ -11,7 +11,7 @@ class SpoolList{
     private:
         std::vector<FilamentSpool> spools;
     public:
-        void addSpool(FilamentSpool& spool);
+        void addSpool(const FilamentSpool& spool);
         bool removeSpool(const std::string& id);
         void updateSpool(const FilamentSpool& spool);
         friend std::ostream& operator<<(std::ostream& os, const SpoolList& spoolList);

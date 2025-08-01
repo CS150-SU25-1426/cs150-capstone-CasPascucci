@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 
-void SpoolList::addSpool(FilamentSpool& spool) {
+void SpoolList::addSpool(const FilamentSpool& spool) {
     spools.push_back(spool);
 }
 bool SpoolList::removeSpool(const std::string& id) {
@@ -11,6 +11,7 @@ bool SpoolList::removeSpool(const std::string& id) {
     for (int i =0; i < spools.size(); ++i) {
         if (spools[i].getId() == id) {
             idx = i;
+            break;
         }
     }
     if (idx >=0) {
@@ -34,6 +35,26 @@ SpoolList& SpoolList::operator-=(const FilamentSpool& spool) {
     return *this;
 }
 SpoolList& SpoolList::operator+=(const FilamentSpool& spool) {
-    addSpool(const_cast<FilamentSpool&>(spool));
+    addSpool(spool);
     return *this;
+}
+void SpoolList::updateSpool(const FilamentSpool& updatedSpool) {
+    for (auto& spool : spools) {
+        if (spool.getId() == updatedSpool.getId()) {
+            spool = updatedSpool; // Uses the copy assignment operator
+            return;
+        }
+    }
+    std::cout << "~~~ Spool ID not found: " << updatedSpool.getId() << " ~~~\n";
+}
+bool SpoolList::operator==(const SpoolList& other) const {
+    if (spools.size() != other.spools.size()) {
+        return false;
+    }
+    for (size_t i = 0; i < spools.size(); ++i) {
+        if (!(spools[i] == other.spools[i])) {
+            return false;
+        }
+    }
+    return true;
 }
