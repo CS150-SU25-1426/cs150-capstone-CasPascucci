@@ -23,9 +23,10 @@ class FilamentSpool {
                       double remainingGrams,
                       double costPerKg);
         FilamentSpool(const FilamentSpool& other);
-        ~FilamentSpool();
+        virtual ~FilamentSpool();
 
         friend std::ostream& operator<<(std::ostream& os, const FilamentSpool& spool);
+        virtual void print(std::ostream& os) const;
         bool operator==(const FilamentSpool& other) const;
 
         double getDiameterMM() const;

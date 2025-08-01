@@ -9,15 +9,15 @@
 
 class SpoolList{
     private:
-        std::vector<FilamentSpool> spools;
+        std::vector<FilamentSpool*> spools;
     public:
-        void addSpool(const FilamentSpool& spool);
+        void addSpool(FilamentSpool* spool);
         bool removeSpool(const std::string& id);
-        void updateSpool(const FilamentSpool& spool);
+        void updateSpool(FilamentSpool* spool);
         friend std::ostream& operator<<(std::ostream& os, const SpoolList& spoolList);
         bool operator==(const SpoolList& other) const;
-        SpoolList& operator-=(const FilamentSpool& spool);
-        SpoolList& operator+=(const FilamentSpool& spool);
+        SpoolList& operator-=(FilamentSpool* spool);
+        SpoolList& operator+=(FilamentSpool* spool);
         
 };
 

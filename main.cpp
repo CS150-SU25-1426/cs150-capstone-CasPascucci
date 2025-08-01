@@ -1,6 +1,8 @@
 #include "SpoolList.h"
 #include "FilamentSpool.h"
+#include "ExtendedFilamentSpool.h"
 #include <iostream>
+#include <iomanip>
 using std::cout;
 using std::cin;
 using std::string;
@@ -16,6 +18,14 @@ int main() {
     double totalGrams;
     double remainingGrams;
     double costPerKg;
+	string vendor;
+	string purchaseDate;
+	bool isOpen;
+	string extendedChoice;
+
+	cout << std::fixed << std::setprecision(2); // Set precision for floating-point output
+
+	// Main menu loop
 
 	do {
 		cout << "************************************************************************\n";
@@ -55,10 +65,23 @@ int main() {
 			cin >> remainingGrams;
 			cout << "Enter Cost per Kg: ";
 			cin >> costPerKg;
-
-			FilamentSpool spool(id, material, color, diameterMM, totalGrams, remainingGrams, costPerKg);
-			inventory.addSpool(spool);
-
+			cout << "Enter an extended spool? (Includes vendor, purchase date, and open status) (y/n): ";
+			cin >> extendedChoice;
+			cin.ignore(); // Ignore the newline character after the choice
+			if (extendedChoice == "y" || extendedChoice == "Y") {
+				cout << "Enter Vendor: ";
+				std::getline(cin, vendor);
+				cout << "Enter Purchase Date (YYYY-MM-DD): ";
+				std::getline(cin, purchaseDate);
+				cout << "Is the spool open? (1 for Yes, 0 for No): ";
+				cin >> isOpen;
+				cin.ignore(); // Ignore the newline character after the choice
+				ExtendedFilamentSpool* extendedSpool = new ExtendedFilamentSpool(id, material, color, diameterMM, totalGrams, remainingGrams, costPerKg, vendor, purchaseDate, isOpen);
+				inventory.addSpool(extendedSpool);
+			} else {
+				FilamentSpool* spool = new FilamentSpool(id, material, color, diameterMM, totalGrams, remainingGrams, costPerKg);
+				inventory.addSpool(spool);
+			}
 			cout << std::endl;
 			break;
 		}

@@ -14,14 +14,18 @@ FilamentSpool::FilamentSpool(const FilamentSpool& other)
 FilamentSpool::~FilamentSpool() {}
 
 std::ostream& operator<<(std::ostream& os, const FilamentSpool& spool) {
-    os << "FilamentSpool [ID: " << spool.id 
-       << ", Material: " << spool.material 
-       << ", Color: " << spool.color 
-       << ", Diameter: " << spool.diameterMM 
-       << "mm, Total: " << spool.totalGrams 
-       << "g, Remaining: " << spool.remainingGrams 
-       << "g, Cost per Kg: $" << spool.costPerKg << "]";
+    spool.print(os);
     return os;
+}
+void FilamentSpool::print(std::ostream& os) const {
+    os << "FilamentSpool [ID: " << id
+       << ", Material: " << material
+       << ", Color: " << color
+       << ", Diameter: " << diameterMM
+       << "mm, Total: " << totalGrams
+       << "g, Remaining: " << remainingGrams
+       << "g, Cost per Kg: $" << costPerKg
+       << "]";
 }
 bool FilamentSpool::operator==(const FilamentSpool& other) const {
     return id == other.id && material == other.material && color == other.color &&
